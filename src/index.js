@@ -17,10 +17,16 @@ function handleCountryList(countries) {
     return;
   }
   if (countries.length === 1) {
-    console.log(countries[0]);
-    infoEl.innerHTML = createCountries(
-      ({ name, capital, languages, population } = countries[0])
-    );
+    let country = {};
+    ({
+      flags: { png: country.flag },
+      name: { common: country.name },
+      capital: [country.capital],
+      languages: country.languages,
+      population: country.population,
+    } = countries[0]);
+    country.languages = Object.values(country.languages).join(', ');
+    infoEl.innerHTML = createCountries(country);
     listEl.innerHTML = '';
   } else {
     listEl.innerHTML = countryList(countries);
